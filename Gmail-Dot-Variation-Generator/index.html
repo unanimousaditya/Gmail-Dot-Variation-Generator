@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gmail Dot Generator - Create Unlimited Email Variations</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Arbutus&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&family=Monsieur+La+Doulaise&family=Moo+Lah+Lah&family=Ribeye&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Ubuntu", sans-serif;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        color: white;
+        background: #000;
+        position: relative;
+        padding: 10px;
+        overflow-x: hidden;
+      }
+
+      .background-image {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: -1;
+      }
+
+      .coming-soon {
+        font-family: "Arbutus", serif;
+        font-size: 1.8rem;
+        font-weight: bold;
+        text-align: center;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+        margin-bottom: 0.5rem;
+        color: white;
+        white-space: nowrap;
+      }
+
+      .initiative {
+        font-family: "Ribeye", serif;
+        font-size: 0.75rem;
+        text-align: center;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+        margin-bottom: 1rem;
+        opacity: 0.8;
+        white-space: nowrap;
+      }
+
+      .dashboard-header {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 1.5rem;
+        width: 100%;
+      }
+
+      .stats-container {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 1rem;
+        flex-wrap: wrap;
+        justify-content: center;
+        width: 100%;
+      }
+
+      .stat-card {
+        background: linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 0.1),
+          rgba(255, 255, 255, 0.05)
+        );
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 10px;
+        padding: 10px 15px;
+        text-align: center;
+        min-width: 90px;
+        flex: 1;
+        max-width: 110px;
+        -webkit-backdrop-filter: blur(10px);
+        backdrop-filter: blur(10px);
+      }
+
+      .stat-number {
+        font-family: "Arbutus", serif;
+        font-size: 1.4rem;
+        font-weight: bold;
+        color: #4ecdc4;
+        margin-bottom: 3px;
+      }
+
+      .stat-label {
+        font-family: "Ubuntu", sans-serif;
+        font-size: 0.7rem;
+        opacity: 0.8;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      .main-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        max-width: 100%;
+        width: 100%;
+        z-index: 10;
+        padding: 0 5px;
+      }
+
+      .content-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        width: 100%;
+        align-items: center;
+      }
+
+      .info-panel {
+        background: linear-gradient(
+          135deg,
+          rgba(0, 0, 0, 0.8),
+          rgba(20, 20, 40, 0.8)
+        );
+        border: 2px solid rgba(255, 255, 255, 0.1);
+        border-radius: 15px;
+        padding: 15px;
+        width: 100%;
+        max-width: 100%;
+        -webkit-backdrop-filter: blur(10px);
+        backdrop-filter: blur(10px);
+        order: 2;
+      }
+
+      .info-title {
+        font-family: "Arbutus", serif;
+        font-size: 1rem;
+        margin-bottom: 10px;
+        color: #4ecdc4;
+      }
+
+      .info-text {
+        font-family: "Ubuntu", sans-serif;
+        font-size: 0.8rem;
+        line-height: 1.5;
+        opacity: 0.9;
+        margin-bottom: 10px;
+      }
+
+      .feature-list {
+        list-style: none;
+        padding: 0;
+      }
+
+      .feature-list li {
+        font-family: "Ubuntu", sans-serif;
+        font-size: 0.75rem;
+        padding: 6px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        position: relative;
+        padding-left: 15px;
+      }
+
+      .feature-list li:before {
+        content: "✓";
+        position: absolute;
+        left: 0;
+        color: #4ecdc4;
+        font-weight: bold;
+      }
+
+      /* Mobile Responsive Styles */
+      @media (max-width: 480px) {
+        .coming-soon {
+          font-size: 1.5rem;
+        }
+        .initiative {
+          font-size: 0.65rem;
+        }
+        .stat-card {
+          min-width: 80px;
+          padding: 8px 12px;
+        }
+        .stat-number {
+          font-size: 1.2rem;
+        }
+        .stat-label {
+          font-size: 0.65rem;
+        }
+        .info-title {
+          font-size: 0.9rem;
+        }
+        .info-text {
+          font-size: 0.75rem;
+        }
+        .feature-list li {
+          font-size: 0.7rem;
+        }
+      }
+
+      @media (max-width: 360px) {
+        .coming-soon {
+          font-size: 1.3rem;
+        }
+        .initiative {
+          font-size: 0.6rem;
+        }
+        .stat-card {
+          min-width: 70px;
+          padding: 6px 8px;
+        }
+        .stat-number {
+          font-size: 1rem;
+        }
+        .stat-label {
+          font-size: 0.6rem;
+        }
+      }
+
+      /* Gmail Generator Tool Styles */
+      .tool-container {
+        position: relative;
+        background: linear-gradient(
+          135deg,
+          rgba(0, 0, 0, 0.9),
+          rgba(20, 20, 40, 0.9)
+        );
+        border: 2px solid rgba(255, 255, 255, 0.2);
+        border-radius: 15px;
+        padding: 20px;
+        width: 100%;
+        max-width: 100%;
+        -webkit-backdrop-filter: blur(15px);
+        backdrop-filter: blur(15px);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        z-index: 1000;
+        order: 1;
+      }
+
+      .tool-container.active {
+        transform: translateX(0);
+      }
+
+      .tool-toggle {
+        display: none;
+      }
+
+      .tool-header {
+        font-family: "Arbutus", serif;
+        font-size: 1.1rem;
+        margin-bottom: 15px;
+        text-align: center;
+        color: white;
+        position: relative;
+        white-space: nowrap;
+      }
+
+      .tool-header::after {
+        content: "";
+        position: absolute;
+        bottom: -8px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 60px;
+        height: 2px;
+        background: linear-gradient(90deg, #4ecdc4, #45b7d1);
+        border-radius: 1px;
+      }
+
+      .tool-input {
+        width: 100%;
+        padding: 12px;
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        border-radius: 10px;
+        background: linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 0.1),
+          rgba(255, 255, 255, 0.05)
+        );
+        color: white;
+        font-family: "Ubuntu", sans-serif;
+        font-size: 14px;
+        margin-bottom: 15px;
+        -webkit-backdrop-filter: blur(10px);
+        backdrop-filter: blur(10px);
+        transition: all 0.3s ease;
+        position: relative;
+      }
+
+      .tool-input::placeholder {
+        color: rgba(255, 255, 255, 0.6);
+      }
+
+      .tool-input:focus {
+        outline: none;
+        border-color: rgba(78, 205, 196, 0.8);
+        background: linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 0.15),
+          rgba(78, 205, 196, 0.1)
+        );
+        box-shadow: 0 0 20px rgba(78, 205, 196, 0.3);
+        transform: translateY(-2px);
+      }
+
+      .generate-btn {
+        width: 100%;
+        padding: 15px;
+        background: linear-gradient(
+          135deg,
+          rgba(78, 205, 196, 0.8),
+          rgba(69, 183, 209, 0.8)
+        );
+        border: 2px solid rgba(78, 205, 196, 0.5);
+        border-radius: 12px;
+        color: white;
+        font-family: "Moo Lah Lah", cursive;
+        font-weight: 400;
+        font-size: 16px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-transform: none;
+        letter-spacing: 0;
+      }
+
+      .generate-btn:hover {
+        background: linear-gradient(
+          135deg,
+          rgba(255, 107, 107, 0.8),
+          rgba(254, 202, 87, 0.8)
+        );
+        border-color: rgba(255, 107, 107, 0.8);
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(78, 205, 196, 0.3);
+      }
+
+      .generate-btn:active {
+        transform: translateY(0px);
+      }
+
+      .results-container {
+        margin-top: 15px;
+        max-height: 300px;
+        overflow-y: auto;
+        padding-right: 5px;
+      }
+
+      .results-container::-webkit-scrollbar {
+        width: 6px;
+      }
+
+      .results-container::-webkit-scrollbar-track {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 3px;
+      }
+
+      .results-container::-webkit-scrollbar-thumb {
+        background: linear-gradient(45deg, #4ecdc4, #45b7d1);
+        border-radius: 3px;
+      }
+
+      .result-item {
+        background: linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 0.08),
+          rgba(255, 255, 255, 0.03)
+        );
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        border-radius: 8px;
+        padding: 10px 12px;
+        margin-bottom: 8px;
+        font-family: "Ubuntu", sans-serif;
+        font-size: 14px;
+        color: white;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        position: relative;
+        word-break: break-all;
+      }
+
+      .result-item:hover {
+        background: linear-gradient(
+          135deg,
+          rgba(78, 205, 196, 0.15),
+          rgba(69, 183, 209, 0.1)
+        );
+        border-color: rgba(78, 205, 196, 0.4);
+        transform: translateX(3px);
+      }
+
+      .result-item.copied {
+        background: linear-gradient(
+          135deg,
+          rgba(0, 255, 100, 0.3),
+          rgba(0, 200, 80, 0.2)
+        );
+        border-color: rgba(0, 255, 100, 0.8);
+        box-shadow: 0 0 10px rgba(0, 255, 100, 0.3);
+      }
+
+      /* Footer Styles */
+      .footer {
+        margin-top: 2rem;
+        padding: 15px;
+        text-align: center;
+        background: linear-gradient(
+          135deg,
+          rgba(0, 0, 0, 0.6),
+          rgba(20, 20, 40, 0.6)
+        );
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 12px;
+        -webkit-backdrop-filter: blur(10px);
+        backdrop-filter: blur(10px);
+        width: 100%;
+      }
+
+      .footer-text {
+        font-family: "Ubuntu", sans-serif;
+        font-size: 0.8rem;
+        color: rgba(255, 255, 255, 0.8);
+        margin-bottom: 5px;
+      }
+
+      .footer-link {
+        color: #4ecdc4;
+        text-decoration: none;
+        font-weight: 500;
+        transition: all 0.3s ease;
+      }
+
+      .footer-link:hover {
+        color: #45b7d1;
+        text-shadow: 0 0 5px rgba(78, 205, 196, 0.5);
+      }
+
+      .heart {
+        color: #ff6b6b;
+        font-size: 0.9rem;
+        animation: heartbeat 2s ease-in-out infinite;
+      }
+
+      @keyframes heartbeat {
+        0%,
+        50%,
+        100% {
+          transform: scale(1);
+        }
+        25%,
+        75% {
+          transform: scale(1.1);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="main-content">
+      <div class="dashboard-header">
+        <h1 class="coming-soon">Gmail Dot Generator</h1>
+        <p class="initiative">Professional Email Variation Dashboard</p>
+
+        <div class="stats-container">
+          <div class="stat-card">
+            <div class="stat-number" id="totalGenerated">0</div>
+            <div class="stat-label">Generated</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number" id="currentVariations">0</div>
+            <div class="stat-label">Current</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number" id="timesSaved">0</div>
+            <div class="stat-label">Saved</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="content-grid">
+        <div class="info-panel">
+          <h3 class="info-title">About Gmail Dot Trick</h3>
+          <p class="info-text">
+            Gmail ignores dots in email addresses, allowing you to create
+            multiple variations of your email while all messages go to the same
+            inbox.
+          </p>
+
+          <h3 class="info-title">Our Service</h3>
+          <ul class="feature-list">
+            <li>Instant email variations</li>
+            <li>Gmail & Googlemail support</li>
+            <li>One-click copy to clipboard</li>
+            <li>Unlimited generations</li>
+            <li>No registration required</li>
+            <li>100% free to use</li>
+          </ul>
+
+          <p class="info-text">
+            <strong>Pro Tip:</strong> Use different variations for online
+            shopping, newsletters, or trial accounts to organize your inbox
+            better!
+          </p>
+        </div>
+
+        <!-- Gmail Generator Tool -->
+        <div class="tool-container active" id="toolContainer">
+          <div class="tool-header">Create Email Variations</div>
+          <input
+            type="email"
+            class="tool-input"
+            id="emailInput"
+            placeholder="Enter your Gmail address (e.g. yourname@gmail.com)..."
+            onkeypress="handleKeyPress(event)"
+          />
+          <button class="generate-btn" onclick="generateEmails()">
+            ✨ Generate Magic Variations ✨
+          </button>
+          <div class="results-container" id="resultsContainer"></div>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <div class="footer">
+        <div class="footer-text">
+          Made with <span class="heart">♥</span> by
+          <a
+            href="https://github.com/unanimousaditya"
+            target="_blank"
+            rel="noopener"
+            class="footer-link"
+            >Aditya Raj</a
+          >
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile optimized background -->
+    <img
+      src="mobile-background.jpg"
+      alt="Background"
+      class="background-image"
+    />
+
+    <script>
+      let totalGeneratedCount = 0;
+      let timesSavedCount = 0;
+
+      function handleKeyPress(event) {
+        if (event.key === "Enter") {
+          generateEmails();
+        }
+      }
+
+      function updateStats(currentCount) {
+        totalGeneratedCount += currentCount;
+
+        document.getElementById("totalGenerated").textContent =
+          totalGeneratedCount;
+        document.getElementById("currentVariations").textContent = currentCount;
+        document.getElementById("timesSaved").textContent = timesSavedCount;
+      }
+
+      function incrementSavedCount() {
+        timesSavedCount++;
+        document.getElementById("timesSaved").textContent = timesSavedCount;
+      }
+
+      function generateEmails() {
+        const emailInput = document.getElementById("emailInput");
+        const resultsContainer = document.getElementById("resultsContainer");
+        const email = emailInput.value.trim();
+
+        if (!email) {
+          alert("Please enter an email address");
+          return;
+        }
+
+        if (!isValidGmail(email)) {
+          alert("Please enter a valid Gmail address (e.g., user@gmail.com)");
+          return;
+        }
+
+        const variations = generateGmailVariations(email);
+        displayResults(variations);
+      }
+
+      function isValidGmail(email) {
+        const gmailRegex = /^[a-zA-Z0-9]+@(gmail\.com|googlemail\.com)$/;
+        return gmailRegex.test(email);
+      }
+
+      function generateGmailVariations(email) {
+        const [username, domain] = email.split("@");
+        const variations = new Set();
+
+        // Add original email
+        variations.add(email);
+
+        // Add googlemail.com variant if it's gmail.com
+        if (domain === "gmail.com") {
+          variations.add(`${username}@googlemail.com`);
+        } else if (domain === "googlemail.com") {
+          variations.add(`${username}@gmail.com`);
+        }
+
+        // Generate dot variations
+        const dotVariations = generateDotVariations(username);
+
+        dotVariations.forEach((variation) => {
+          variations.add(`${variation}@gmail.com`);
+          if (domain === "gmail.com") {
+            variations.add(`${variation}@googlemail.com`);
+          }
+        });
+
+        return Array.from(variations);
+      }
+
+      function generateDotVariations(username) {
+        const variations = new Set();
+        const len = username.length;
+
+        // Generate all possible dot positions (between characters)
+        for (let i = 1; i < Math.pow(2, len - 1); i++) {
+          let variation = "";
+          for (let j = 0; j < len; j++) {
+            variation += username[j];
+            // Check if we should add a dot after this character
+            if (j < len - 1 && i & (1 << j)) {
+              variation += ".";
+            }
+          }
+          variations.add(variation);
+        }
+
+        return Array.from(variations);
+      }
+
+      function displayResults(variations) {
+        const resultsContainer = document.getElementById("resultsContainer");
+        resultsContainer.innerHTML = "";
+
+        if (variations.length === 0) {
+          resultsContainer.innerHTML =
+            '<div class="result-item">No variations generated</div>';
+          return;
+        }
+
+        // Update dashboard stats
+        updateStats(variations.length);
+
+        variations.forEach((email) => {
+          const resultItem = document.createElement("div");
+          resultItem.className = "result-item";
+          resultItem.textContent = email;
+          resultItem.onclick = () => copyToClipboard(email, resultItem);
+
+          resultsContainer.appendChild(resultItem);
+        });
+      }
+
+      function copyToClipboard(text, element) {
+        navigator.clipboard
+          .writeText(text)
+          .then(() => {
+            element.classList.add("copied");
+            incrementSavedCount();
+            setTimeout(() => {
+              element.classList.remove("copied");
+            }, 1000);
+          })
+          .catch((err) => {
+            // Fallback for older browsers
+            const textArea = document.createElement("textarea");
+            textArea.value = text;
+            document.body.appendChild(textArea);
+            textArea.select();
+            document.execCommand("copy");
+            document.body.removeChild(textArea);
+
+            element.classList.add("copied");
+            incrementSavedCount();
+            setTimeout(() => {
+              element.classList.remove("copied");
+            }, 1000);
+          });
+      }
+    </script>
+  </body>
+</html>
